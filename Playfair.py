@@ -5,7 +5,6 @@ alph_rus='АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЬЫЭЮЯ' #del Й 
 decode_string_rus='ЛМЧШЮГХТЯПХООПКПЖМКЧВЦАОБФЖГКХПНЯВЖФЪЛЯНХОФЗТЪСЦПИЛФЛЪШШ' #вариант 9 replace Ъ Й
 encode_string_rus='КОДПЛЕЙФЕЙЕРАОСНОВАННАИСПОЛЬЗОВАНИИМАТРИЦЫБУКВ'
 
-print(len(encode_string_rus))
 def key_matrix(key,alph):
   temp = list(key)
   for char in alph:
@@ -23,9 +22,9 @@ def decode_encode(decode_string,matrix,switch):
     i,j=first_index[0][0],first_index[1][0]
     n,m=second_index[0][0],second_index[1][0]
     if (i==n):
-      answer+=matrix[i][(j+switch)%6]+matrix[n][(m+switch)%6]
+      answer+=matrix[i][(j+switch)%np.shape(matrix)[1]]+matrix[n][(m+switch)%np.shape(matrix)[1]]
     elif (j==m):
-      answer+=matrix[(i+switch)%5][j]+matrix[(n+switch)%5][m]
+      answer+=matrix[(i+switch)%np.shape(matrix)[0]][j]+matrix[(n+switch)%np.shape(matrix)[0]][m]
     else:
       answer+=matrix[i][m]+matrix[n][j]
   return answer
@@ -33,3 +32,5 @@ def decode_encode(decode_string,matrix,switch):
 key_array=key_matrix(key_word,alph_rus)
 enc=decode_encode(decode_string_rus,key_array,-1)
 dec=decode_encode(encode_string_rus,key_array,1)
+print(enc)
+print(dec)
