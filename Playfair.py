@@ -5,17 +5,25 @@ alph_rus='АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЬЫЭЮЯ' #del Й 
 decode_string_rus='ЛМЧШЮГХТЯПХООПКПЖМКЧВЦАОБФЖГКХПНЯВЖФЪЛЯНХОФЗТЪСЦПИЛФЛЪШШ' #вариант 9 replace Ъ Й
 encode_string_rus='КОДПЛЕЙФЕЙЕРАОСНОВАННАИСПОЛЬЗОВАНИИМАТРИЦЫБУКВ'
 
+def check_on_repeat(string,word):
+  temp=''
+  for i in range(len(string)-1):
+    if string[i]==string[i+1]:
+      temp=string[:i]+string[i]+word+string[i+1:]
+  if len(temp)%2!=0:
+    temp+=word
+  return temp
+
 def key_matrix(key,alph):
-  temp = list(key)
-  for char in alph:
-    if (key.find(char) == -1):
-      temp += char;
+  temp = list(dict.fromkeys(key+alph))
   array=np.array(temp).reshape(5,6)
   return array
 
-def decode_encode(decode_string,matrix,switch):
+def decode_encode(decode_string,matrix,switch): # if switch = 1 - encode else decode
+  print(decode_string)
   temp=[decode_string[i:i+2].replace('Ъ','Ь').replace('Й','И').replace('Ё','Е') for i in range(0, len(decode_string), 2)]
   answer=''
+  print(temp)
   for element in temp:
     first_index=np.where(matrix == element[0])
     second_index=np.where(matrix == element[1])
@@ -30,7 +38,6 @@ def decode_encode(decode_string,matrix,switch):
   return answer
         
 key_array=key_matrix(key_word,alph_rus)
-enc=decode_encode(decode_string_rus,key_array,-1)
-dec=decode_encode(encode_string_rus,key_array,1)
-print(enc)
-print(dec)
+string=check_on_repeat(decode_string_rus,'З')
+
+print(decode_encode(string,key_array,-1))
