@@ -1,7 +1,7 @@
 import random
 from time import clock
 
-alpha='АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'
+alpha=u'АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'
 dec_string='КОГДАТОЯБЫЛПАРНИШКОЙ'
 key_word='ОСЕНЬ'
 
