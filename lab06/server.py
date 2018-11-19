@@ -7,9 +7,9 @@ class Server(socketserver.BaseRequestHandler):
         recv=self.request.recv(1024).decode() #get connection
         print(recv)
 
-        self.privatePrime = RandomPrime()
-        self.sharedPrime = RandomPrime()
-        self.base = RandomPrime()
+        self.privatePrime = RandomPrime(128)
+        self.sharedPrime = RandomPrime(256)
+        self.base = RandomPrime(4)
 
         publicSecret=calcKey(self.base,self.privatePrime,self.sharedPrime)
 

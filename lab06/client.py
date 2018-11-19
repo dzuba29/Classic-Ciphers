@@ -11,7 +11,7 @@ class Client:
 
         rec_data=json.loads(rec_data.decode())
 
-        self.privatePrime=RandomPrime()
+        self.privatePrime=RandomPrime(128)
         self.sharedPrime=int(rec_data['shared_prime'])
         self.base=int(rec_data['base'])
         recPublicSecret=int(rec_data['public_secret'])
@@ -35,6 +35,6 @@ class Client:
         try:
             sock.connect((ip, 3000))
             self.start_diffie_hellman(sock)
-            print("Secret key{}".format(self.key))
+            print("Secret key {}".format(self.key))
         finally:
             sock.close()
